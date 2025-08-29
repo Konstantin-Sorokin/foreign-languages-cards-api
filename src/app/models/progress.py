@@ -12,7 +12,9 @@ if TYPE_CHECKING:
 
 class Progress(Base):
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.telegram_id"), primary_key=True
+    )
     card_id: Mapped[int] = mapped_column(
         ForeignKey("translation_cards.id"), primary_key=True
     )
