@@ -16,10 +16,3 @@ class Base(DeclarativeBase):
     @declared_attr.directive
     def __tablename__(cls) -> str:
         return f"{camel_case_to_snake_case(cls.__name__)}s"
-
-
-class CardBase(Base):
-    __abstract__ = True
-
-    pack_id: Mapped[int | None] = mapped_column(ForeignKey("packs.id"), nullable=True)
-    author: Mapped["Author"] = relationship(back_populates="biography")
