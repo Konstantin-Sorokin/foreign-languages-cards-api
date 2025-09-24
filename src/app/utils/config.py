@@ -12,6 +12,9 @@ class RunConfig(BaseModel):
 
 class ApiConfig(BaseModel):
     prefix: str = "/api"
+    users_prefix: str = "/users"
+    packs_prefix: str = "/packs"
+    cards_prefix: str = "/cards"
 
 
 class DatabaseConfig(BaseModel):
