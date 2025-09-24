@@ -9,7 +9,7 @@ from app.services import (
     get_card_service,
     get_pack_service,
 )
-from app.utils.card_types import IRREGULAR_VERB_CARD
+from app.utils.card_types import CardType
 
 
 async def get_cards(
@@ -20,9 +20,12 @@ async def get_cards(
 
     pack: Pack = await pack_service.get_pack_by_id(pack_id=pack_id)
 
-    if pack.card_type == IRREGULAR_VERB_CARD:
-        return await card_service.get_irregular_verb_cards_by_pack_id(pack_id=pack_id)
-
-    raise HTTPException(
-        status_code=400, detail=f"Не поддерживаемый тип карт {pack.card_type}"
-    )
+    match pack.card_type:
+        case CardType.IRREGULAR_VERB:
+            return await card_service.get_irregular_verb_cards_by_pack_id(
+                pack_id=pack_id
+            )
+        case _:
+            raise HTTPException(
+                status_code=400, detail=f"Не поддерживаемый тип карт: {pack.card_type}"
+            )
