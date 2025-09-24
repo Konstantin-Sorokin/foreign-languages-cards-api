@@ -18,7 +18,7 @@ class Progress(Base):
     card_id: Mapped[int] = mapped_column(
         ForeignKey("translation_cards.id"), primary_key=True
     )
-    interval: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    last_shown: Mapped[datetime]
+    interval_level: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    next_repeat: Mapped[datetime]
 
     card: Mapped["TranslationCard"] = relationship("TranslationCard")

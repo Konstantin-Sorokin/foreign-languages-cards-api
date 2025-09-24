@@ -7,17 +7,10 @@ if TYPE_CHECKING:
     from app.schemas.card import TranslationCardRead
 
 
-class ProgressCreate(BaseModel):
+class ProgressRead(BaseModel):
     interval: int
-    last_shown: datetime
+    card: "TranslationCardRead"
 
 
 class ProgressUpdate(BaseModel):
-    interval: int
-    last_shown: datetime
-
-
-class ProgressRead(BaseModel):
-    interval: int
-    last_shown: datetime
-    card: "TranslationCardRead"
+    success: bool
