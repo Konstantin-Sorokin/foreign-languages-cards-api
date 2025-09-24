@@ -1,5 +1,6 @@
 from app.models import Pack
 from app.services.base import BaseService
+from app.utils.card_types import CardType
 
 
 class PackService(BaseService):
@@ -8,7 +9,7 @@ class PackService(BaseService):
         self,
         name: str,
         description: str,
-        card_type: str,
+        card_type: CardType,
     ) -> Pack:
         pack = Pack(name=name, description=description, card_type=card_type)
         self.session.add(pack)
