@@ -24,7 +24,7 @@ router = APIRouter(
 )
 async def create_pack(
     request: PackCreate,
-    pack_service: Annotated[PackService, get_pack_service],
+    pack_service: Annotated[PackService, Depends(get_pack_service)],
 ):
     return pack_service.create_pack(
         name=request.name,
