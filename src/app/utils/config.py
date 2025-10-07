@@ -1,8 +1,12 @@
+from pathlib import Path
+
 from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import (
     BaseSettings,
     SettingsConfigDict,
 )
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 
 class RunConfig(BaseModel):
@@ -36,8 +40,8 @@ class DatabaseConfig(BaseModel):
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(
-            ".env.template",
-            ".env",
+            PROJECT_ROOT / ".env.template",
+            PROJECT_ROOT / ".env",
         ),
         case_sensitive=False,
         env_nested_delimiter="__",
