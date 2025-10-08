@@ -1,7 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserCreate(BaseModel):
+    telegram_id: int
+    # email: EmailStr | None
+    # password: str | None
     first_name: str
     last_name: str | None
     username: str | None
