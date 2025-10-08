@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.services.card import CardService
 from app.services.pack import PackService
 from app.services.progress import ProgressService
+from app.services.user import UserService
 from app.utils import db_helper
 
 
@@ -34,3 +35,12 @@ def get_pack_service(
     Возвращает экземпляр PackService с переданной сессией.
     """
     return PackService(session=session)
+
+
+def get_user_service(
+    session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
+) -> UserService:
+    """
+    Возвращает экземпляр UserService с переданной сессией.
+    """
+    return UserService(session=session)

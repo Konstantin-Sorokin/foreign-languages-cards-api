@@ -1,7 +1,5 @@
 from datetime import datetime, timezone, timedelta
-from typing import Annotated
 
-from fastapi import Path
 from sqlalchemy import func, select
 
 from app.models.progress import Progress
