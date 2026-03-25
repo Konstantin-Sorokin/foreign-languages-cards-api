@@ -20,7 +20,7 @@ line-length = 88
 exclude = [
     ".git",
     ".venv",
-    "migrations",
+    "alembic/versions",
     "__pycache__",
     "uv.lock",
 ]
