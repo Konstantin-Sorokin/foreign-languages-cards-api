@@ -11,3 +11,28 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.0.40",
     "uvicorn[standard]>=0.34.2",
 ]
+
+[tool.ruff]
+target-version = "py313"
+
+line-length = 88
+
+exclude = [
+    ".git",
+    ".venv",
+    "migrations",
+    "__pycache__",
+    "uv.lock",
+]
+
+[tool.ruff.lint]
+# Включенные правила
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # Pyflakes
+    "I", # isort
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
