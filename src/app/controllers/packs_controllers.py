@@ -1,8 +1,8 @@
 from typing import Annotated
 
-from fastapi import Path, Depends, HTTPException
+from fastapi import Depends, HTTPException, Path
 
-from app.models import Pack, IrregularVerbCard
+from app.models import IrregularVerbCard, Pack
 from app.services import (
     CardService,
     PackService,
@@ -29,3 +29,4 @@ async def get_cards(
             raise HTTPException(
                 status_code=400, detail=f"Не поддерживаемый тип карт: {pack.card_type}"
             )
+

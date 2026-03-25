@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, Depends, status
 
 from app.controllers.packs_controllers import get_cards
 from app.models import IrregularVerbCard

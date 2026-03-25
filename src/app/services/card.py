@@ -1,11 +1,10 @@
 from sqlalchemy import select
 
-from app.models import TranslationCard, IrregularVerbCard
+from app.models import IrregularVerbCard, TranslationCard
 from app.services.base import BaseService
 
 
 class CardService(BaseService):
-
     async def create_irregular_verb_card(
         self,
         base_form: str,

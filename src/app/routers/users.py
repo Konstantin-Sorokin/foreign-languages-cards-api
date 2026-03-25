@@ -1,14 +1,14 @@
 from typing import Annotated
 
-from fastapi import APIRouter, status, Depends, Path
+from fastapi import APIRouter, Depends, Path, status
 
 from app.controllers.progress_controllers import create_progress
 from app.schemas.progress import ProgressRead, ProgressUpdate
 from app.schemas.user import UserCreate
 from app.services import (
     ProgressService,
-    get_progress_service,
     UserService,
+    get_progress_service,
     get_user_service,
 )
 from app.utils import settings

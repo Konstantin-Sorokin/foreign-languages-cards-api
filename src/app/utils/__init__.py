@@ -1,6 +1,6 @@
 from app.utils.config import settings
 from app.utils.db_helper import db_helper
-from app.utils.get_intervals import increase_interval, decrease_interval
+from app.utils.get_intervals import decrease_interval, increase_interval
 
 __all__ = [
     "settings",

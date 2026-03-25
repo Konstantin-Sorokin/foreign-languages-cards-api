@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Path, Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Path, status
 
 from app.schemas.card import TranslationCardCreate
 from app.services import (
@@ -28,8 +28,8 @@ async def create_progress(
             await progress_service.create_progress(user_id, card.id)
         return card.id
 
-    except Exception:
+    except Exception as err:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Не удалось сохранить данные. Попробуйте позже.",
-        )
+        ) from err

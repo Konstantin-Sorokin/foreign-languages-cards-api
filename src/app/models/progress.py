@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Integer, ForeignKey
+from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 
 class Progress(Base):
-
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.telegram_id"), primary_key=True
     )

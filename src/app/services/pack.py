@@ -4,7 +4,6 @@ from app.utils.card_types import CardType
 
 
 class PackService(BaseService):
-
     async def create_pack(
         self,
         name: str,

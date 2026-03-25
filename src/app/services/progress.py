@@ -1,19 +1,18 @@
-from datetime import datetime, timezone, timedelta
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import func, select
 
 from app.models.progress import Progress
 from app.services.base import BaseService
-from app.utils import increase_interval, decrease_interval
+from app.utils import decrease_interval, increase_interval
 
 
 class ProgressService(BaseService):
-
     async def create_progress(self, user_id: int, card_id: int) -> None:
         progress = Progress(
             user_id=user_id,
             card_id=card_id,
-            next_repeat=datetime.now(timezone.utc),
+            next_repeat=datetime.now(UTC),
         )
 
         self.session.add(progress)
@@ -46,7 +45,7 @@ class ProgressService(BaseService):
         else:
             interval_level, interval = decrease_interval(progress.interval_level)
 
-        progress.next_repeat = datetime.now(timezone.utc) + timedelta(days=interval)
+        progress.next_repeat = datetime.now(UTC) + timedelta(days=interval)
         progress.interval_level = interval_level
 
         await self.session.commit()
