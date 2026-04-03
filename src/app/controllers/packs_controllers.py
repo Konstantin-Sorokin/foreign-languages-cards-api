@@ -18,7 +18,10 @@ async def get_cards(
     pack_service: Annotated[PackService, Depends(get_pack_service)],
 ) -> list[IrregularVerbCard]:
 
-    pack: Pack = await pack_service.get_pack_by_id(pack_id=pack_id)
+    pack = await pack_service.get_pack_by_id(pack_id=pack_id)
+
+    if pack is None:
+        raise HTTPException(status_code=404, detail="Пак не найден")
 
     match pack.card_type:
         case CardType.IRREGULAR_VERB:
@@ -29,4 +32,3 @@ async def get_cards(
             raise HTTPException(
                 status_code=400, detail=f"Не поддерживаемый тип карт: {pack.card_type}"
             )
-

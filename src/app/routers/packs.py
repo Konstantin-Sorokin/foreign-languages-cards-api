@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Path, status
 
 from app.controllers.packs_controllers import get_cards
 from app.models import IrregularVerbCard
@@ -26,7 +26,7 @@ async def create_pack(
     request: PackCreate,
     pack_service: Annotated[PackService, Depends(get_pack_service)],
 ):
-    return pack_service.create_pack(
+    return await pack_service.create_pack(
         name=request.name,
         description=request.description,
         card_type=request.card_type,
@@ -41,6 +41,7 @@ async def create_pack(
     ],  # В дальнейшем добавить другие типы карт
 )
 async def get_cards_by_pack(
+    pack_id: Annotated[int, Path()],
     cards: Annotated[list[IrregularVerbCard], Depends(get_cards)],
 ):
     return cards

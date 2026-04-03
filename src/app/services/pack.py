@@ -16,4 +16,5 @@ class PackService(BaseService):
         return pack
 
     async def get_pack_by_id(self, pack_id: int) -> Pack | None:
-        return await self.session.get(Pack, pack_id)
+        stmt = select(Pack).where(Pack.id == pack_id)
+        return await self.session.scalar(stmt)
