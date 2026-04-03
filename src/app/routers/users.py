@@ -3,8 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Path, status
 
 from app.controllers.progress_controllers import create_progress
-from app.schemas.progress import ProgressRead, ProgressUpdate
-from app.schemas.user import UserCreate
+from app.schemas.card import TranslationCardRead
+from app.schemas.progress import ProgressUpdate
+from app.schemas.user import UserCreate, UserResponse
 from app.services import (
     ProgressService,
     UserService,
@@ -19,12 +20,16 @@ router = APIRouter(
 )
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_user(
+@router.post(
+    "/",
+    response_model=UserResponse,
+    status_code=status.HTTP_200_OK,
+)
+async def get_or_create_user(
     request: UserCreate,
     user_service: Annotated[UserService, Depends(get_user_service)],
 ):
-    return await user_service.create_user(telegram_id=request.telegram_id)
+    return await user_service.get_or_create_user(telegram_id=request.telegram_id)
 
 
 @router.post("/{user_id}/progress/", status_code=status.HTTP_201_CREATED)
@@ -36,7 +41,7 @@ async def create_progress_for_user(
 
 @router.get(
     "/{user_id}/progress/",
-    response_model=list[ProgressRead],
+    response_model=list[TranslationCardRead],
     status_code=status.HTTP_200_OK,
 )
 async def get_all_need_progress_for_user(
