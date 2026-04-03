@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class TranslationCardCreate(BaseModel):
     original: str
     translation: str
-    pack_id: int | None
+    pack_id: int | None = None
 
 
 class TranslationCardRead(BaseModel):

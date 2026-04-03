@@ -34,6 +34,7 @@ async def get_or_create_user(
 
 @router.post("/{user_id}/progress/", status_code=status.HTTP_201_CREATED)
 async def create_progress_for_user(
+    user_id: Annotated[int, Path()],
     card_id: Annotated[int, Depends(create_progress)],
 ) -> int:
     return card_id
