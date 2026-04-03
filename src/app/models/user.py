@@ -1,4 +1,4 @@
-from sqlalchemy import Integer
+from sqlalchemy import BigInteger
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -7,7 +7,7 @@ from app.models.mixins import IdPkMixin
 
 class User(Base, IdPkMixin):
     telegram_id: Mapped[int | None] = mapped_column(
-        Integer, unique=True, nullable=False
+        BigInteger, unique=True, nullable=False
     )  # nullable=False, пока нет email и password
     # email: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
     # password: Mapped[str | None] = mapped_column(String(255), nullable=True)
