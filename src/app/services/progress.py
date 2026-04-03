@@ -2,6 +2,7 @@ from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import func, select
 
+from app.models import TranslationCard
 from app.models.progress import Progress
 from app.services.base import BaseService
 from app.utils import decrease_interval, increase_interval
@@ -17,13 +18,17 @@ class ProgressService(BaseService):
 
         self.session.add(progress)
 
-    async def get_all_need_progress(self, user_id: int) -> list[Progress]:
+    async def get_all_need_card_by_progress(
+        self, user_id: int
+    ) -> list[TranslationCard]:
         stmt = (
-            select(Progress)
+            select(TranslationCard)
+            .join(Progress, Progress.card_id == TranslationCard.id)
             .where(Progress.user_id == user_id)
             .where(Progress.next_repeat <= func.now())
             .order_by(Progress.next_repeat)
         )
+
         all_progress = await self.session.scalars(stmt)
         return list(all_progress)
 
