@@ -10,6 +10,10 @@ class UserCreate(BaseModel):
     # username: str | None
 
 
+class UserResponse(BaseModel):
+    id: int
+
+
 class UserUpdate(BaseModel):
     first_name: str | None
     last_name: str | None
