@@ -2,7 +2,7 @@
 name = "foreign-languages-cards-api"
 version = "0.1.0"
 readme = "README.md"
-requires-python = ">=3.13.7"
+requires-python = ">=3.13"
 dependencies = [
     "alembic>=1.16.5",
     "asyncpg>=0.30.0",
