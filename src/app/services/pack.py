@@ -20,3 +20,7 @@ class PackService(BaseService):
     async def get_pack_by_id(self, pack_id: int) -> Pack | None:
         stmt = select(Pack).where(Pack.id == pack_id)
         return await self.session.scalar(stmt)
+
+    async def get_all_packs(self) -> list[Pack]:
+        result = await self.session.execute(select(Pack))
+        return list(result.scalars())
