@@ -34,6 +34,17 @@ async def create_pack(
 
 
 @router.get(
+    "/",
+    status_code=status.HTTP_200_OK,
+    response_model=list[PackRead],
+)
+async def get_all_packs(
+    pack_service: Annotated[PackService, Depends(get_pack_service)],
+):
+    return await pack_service.get_all_packs()
+
+
+@router.get(
     "/{pack_id}/cards/",
     status_code=status.HTTP_200_OK,
     response_model=list[
