@@ -26,16 +26,16 @@ router = APIRouter(
     status_code=status.HTTP_200_OK,
 )
 async def get_or_create_user(
-    request: UserCreate,
-    user_service: Annotated[UserService, Depends(get_user_service)],
+        request: UserCreate,
+        user_service: Annotated[UserService, Depends(get_user_service)],
 ):
     return await user_service.get_or_create_user(telegram_id=request.telegram_id)
 
 
 @router.post("/{user_id}/progress/", status_code=status.HTTP_201_CREATED)
 async def create_progress_for_user(
-    user_id: Annotated[int, Path()],
-    card_id: Annotated[int, Depends(create_progress)],
+        user_id: Annotated[int, Path()],
+        card_id: Annotated[int, Depends(create_progress)],
 ) -> int:
     return card_id
 
@@ -46,20 +46,19 @@ async def create_progress_for_user(
     status_code=status.HTTP_200_OK,
 )
 async def get_all_need_progress_for_user(
-    user_id: Annotated[int, Path()],
-    progress_service: Annotated[ProgressService, Depends(get_progress_service)],
+        user_id: Annotated[int, Path()],
+        progress_service: Annotated[ProgressService, Depends(get_progress_service)],
 ):
-    return await progress_service.get_all_need_progress(user_id)
+    return await progress_service.get_all_need_card_by_progress(user_id)
 
 
 @router.patch("/{user_id}/card/{card_id}/progress/", status_code=status.HTTP_200_OK)
 async def update_progress_card_for_user(
-    user_id: Annotated[int, Path(description="ID пользователя")],
-    card_id: Annotated[int, Path(description="ID карточки")],
-    request: ProgressUpdate,
-    progress_service: Annotated[ProgressService, Depends(get_progress_service)],
+        user_id: Annotated[int, Path(description="ID пользователя")],
+        card_id: Annotated[int, Path(description="ID карточки")],
+        request: ProgressUpdate,
+        progress_service: Annotated[ProgressService, Depends(get_progress_service)],
 ):
-
     return await progress_service.update_progress(
         user_id=user_id,
         card_id=card_id,
